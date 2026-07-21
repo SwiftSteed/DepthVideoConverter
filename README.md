@@ -38,17 +38,9 @@
 
 ## What does it do?
 
-You give it a normal video.  It gives you back the same video — except every
-frame is now a **depth map**: near objects are bright, far objects are dark
-(or the other way around if you flip the switch).
+This tool applies **monocular depth estimation** to every frame of a video, producing a **depth map video** — a grayscale output where each pixel's brightness encodes its distance from the camera.
 
-<p align="center">
-  <em>(screenshot coming soon)</em>
-</p>
-
-Under the hood it runs [Depth Anything V2](https://github.com/DepthAnything/Depth-Anything-V2),
-a transformer-based monocular depth estimation model that works on pretty much
-any scene — indoors, outdoors, people, objects, landscapes.
+Powered by [Depth Anything V2](https://github.com/DepthAnything/Depth-Anything-V2), a foundation model for monocular depth estimation (NeurIPS 2024). Everything runs locally.
 
 ---
 

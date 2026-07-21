@@ -38,13 +38,9 @@
 
 ## 它能做什么？
 
-输入一段普通视频，输出同样的视频——只是每一帧都变成了**深度图**：近处物体更亮，远处物体更暗（也可以翻转）。
+对视频的每一帧进行**单目深度估计**，输出**深度图视频**——画面中每个像素的亮度表示该点到相机的距离。
 
-<p align="center">
-  <em>（截图即将添加）</em>
-</p>
-
-底层基于 [Depth Anything V2](https://github.com/DepthAnything/Depth-Anything-V2)，一个基于 Transformer 的单目深度估计模型，适用于几乎所有场景——室内、室外、人物、物体、风景。
+底层模型为 [Depth Anything V2](https://github.com/DepthAnything/Depth-Anything-V2)，一个单目深度估计基础模型（NeurIPS 2024）。全程本地运行。
 
 ---
 
