@@ -1,0 +1,19 @@
+# ------------------------------------------------------------------
+# Depth Video Converter — Python dependencies
+#
+# Install:  pip install -r requirements.txt
+# ------------------------------------------------------------------
+
+# --- Web UI ---
+gradio>=4.0,<6.0
+
+# --- Deep-learning runtime ---
+torch>=2.1
+torchvision>=0.16
+
+# --- Image / video processing ---
+opencv-python>=4.8
+numpy>=1.24
+
+# --- Not required but recommended ---
+# accelerate>=0.25   (optional — speeds model loading on multi-GPU setups)

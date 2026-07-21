@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+
+# Virtual environment
+venv/
+.venv/
+
+# Model checkpoint files (too large for git)
+models/*.pth
+
+# macOS
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
+
+# OMC
+.omc/
