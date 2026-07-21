@@ -2,6 +2,8 @@
   <sub>EN</sub> | <a href="README_CN.md">中文</a>
 </p>
 
+<h1 align="center">Depth Video Converter</h1>
+
 <p align="center">
   Turn any video into a <strong>grayscale depth-map video</strong> using
   <a href="https://github.com/DepthAnything/Depth-Anything-V2">Depth Anything V2</a>.
