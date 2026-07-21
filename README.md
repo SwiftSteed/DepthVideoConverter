@@ -63,14 +63,14 @@ Powered by [Depth Anything V2](https://github.com/DepthAnything/Depth-Anything-V
 |---|---|---|
 | **Python 3.10+** | The app runtime | [python.org](https://www.python.org/downloads/) |
 | **ffmpeg** | Video encoding & audio muxing | `brew install ffmpeg` (Mac) / `winget install ffmpeg` (Win) |
-| **Model checkpoints** | Depth Anything V2 weights | Download `.pth` files from [GitHub Releases](https://github.com/DepthAnything/Depth-Anything-V2/releases) → place in `models/` |
+| **Model checkpoints** | Depth Anything V2 weights | Auto-downloaded on first use from Hugging Face; cached in `models/` |
 
 Everything else is installed by `pip install -r requirements.txt`.
 
-### Downloading model checkpoints
+### Model checkpoints
 
-Download the `.pth` files from the [official releases page](https://github.com/DepthAnything/Depth-Anything-V2/releases)
-and place them in the `models/` directory:
+Model weights are downloaded automatically the first time you select a model size.
+They are cached in the `models/` directory:
 
 ```
 models/
@@ -79,8 +79,9 @@ models/
 └── depth_anything_v2_vitl.pth   # 1.2 GB — Large
 ```
 
-You only need the model(s) you plan to use. The app will show which files are
-present on startup.
+You can also pre-download them manually from
+[Hugging Face](https://huggingface.co/depth-anything) and place them in `models/`
+if you prefer.
 
 ---
 
@@ -91,19 +92,15 @@ present on startup.
 git clone https://github.com/SwiftSteed/DepthVideoConverter.git
 cd DepthVideoConverter
 
-# 2. Download model checkpoints (pick at least one)
-#    → https://github.com/DepthAnything/Depth-Anything-V2/releases
-#    Place the .pth files in the models/ directory.
-
-# 3. Create a virtual environment
+# 2. Create a virtual environment
 python3 -m venv venv
 source venv/bin/activate          # macOS / Linux
 # venv\Scripts\Activate.ps1       # Windows PowerShell
 
-# 4. Install Python dependencies
+# 3. Install Python dependencies
 pip install -r requirements.txt
 
-# 5. Launch
+# 4. Launch
 python depth_video_converter.py
 ```
 
@@ -126,8 +123,8 @@ Open **http://127.0.0.1:7860** in your browser, upload a video, and hit
 3. Upload an **MP4** or **MOV** video
 4. Choose your settings (see [Controls](#controls))
 5. Click **Process Video**
-6. Watch the progress bar — models are loaded from local `models/` directory,
-   so there's zero network delay
+6. Watch the progress bar — models auto-download on first use, then load from
+   the local `models/` directory with zero network delay
 7. Download or play the output video
 
 ---

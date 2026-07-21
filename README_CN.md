@@ -63,13 +63,13 @@
 |---|---|---|
 | **Python 3.10+** | 应用运行环境 | [python.org](https://www.python.org/downloads/) |
 | **ffmpeg** | 视频编码与音频封装 | `brew install ffmpeg`（Mac）/ `winget install ffmpeg`（Win） |
-| **模型权重** | Depth Anything V2 权重 | 从 [GitHub Releases](https://github.com/DepthAnything/Depth-Anything-V2/releases) 下载 `.pth` 文件 → 放入 `models/` |
+| **模型权重** | Depth Anything V2 权重 | 首次使用时从 Hugging Face 自动下载，缓存在 `models/` |
 
 其余依赖由 `pip install -r requirements.txt` 自动安装。
 
-### 下载模型权重
+### 模型权重
 
-从[官方 Releases 页面](https://github.com/DepthAnything/Depth-Anything-V2/releases)下载 `.pth` 文件，放入 `models/` 目录：
+首次选择模型时自动下载，缓存在 `models/` 目录：
 
 ```
 models/
@@ -78,7 +78,7 @@ models/
 └── depth_anything_v2_vitl.pth   # 1.2 GB — Large
 ```
 
-只需下载你计划使用的模型。启动时应用会检测已有文件。
+也可以从 [Hugging Face](https://huggingface.co/depth-anything) 手动下载放入 `models/`。
 
 ---
 
@@ -89,19 +89,15 @@ models/
 git clone https://github.com/SwiftSteed/DepthVideoConverter.git
 cd DepthVideoConverter
 
-# 2. 下载模型权重（至少一个）
-#    → https://github.com/DepthAnything/Depth-Anything-V2/releases
-#    将 .pth 文件放入 models/ 目录
-
-# 3. 创建虚拟环境
+# 2. 创建虚拟环境
 python3 -m venv venv
 source venv/bin/activate          # macOS / Linux
 # venv\Scripts\Activate.ps1       # Windows PowerShell
 
-# 4. 安装 Python 依赖
+# 3. 安装 Python 依赖
 pip install -r requirements.txt
 
-# 5. 启动
+# 4. 启动
 python depth_video_converter.py
 ```
 

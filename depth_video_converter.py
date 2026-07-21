@@ -26,6 +26,7 @@ import tempfile
 import time
 from pathlib import Path
 from typing import Dict, Optional, Tuple
+from urllib.request import urlretrieve
 
 import cv2
 import numpy as np
@@ -47,18 +48,21 @@ MODEL_DEFS: Dict[str, dict] = {
         "features": 64,
         "out_channels": [48, 96, 192, 384],
         "path": MODELS_DIR / "depth_anything_v2_vits.pth",
+        "url": "https://huggingface.co/depth-anything/Depth-Anything-V2-Small/resolve/main/depth_anything_v2_vits.pth",
     },
     "Base (balanced, ~372 MB)": {
         "encoder": "vitb",
         "features": 128,
         "out_channels": [96, 192, 384, 768],
         "path": MODELS_DIR / "depth_anything_v2_vitb.pth",
+        "url": "https://huggingface.co/depth-anything/Depth-Anything-V2-Base/resolve/main/depth_anything_v2_vitb.pth",
     },
     "Large (best quality, ~1.2 GB)": {
         "encoder": "vitl",
         "features": 256,
         "out_channels": [256, 512, 1024, 1024],
         "path": MODELS_DIR / "depth_anything_v2_vitl.pth",
+        "url": "https://huggingface.co/depth-anything/Depth-Anything-V2-Large/resolve/main/depth_anything_v2_vitl.pth",
     },
 }
 
@@ -188,24 +192,51 @@ def merge_audio_video(video_path: str, audio_path: str, output_path: str) -> Non
 # Model helpers
 # ---------------------------------------------------------------------------
 
-def load_model(model_size_label: str, device_str: str) -> DepthAnythingV2:
+def _download_with_progress(url: str, dest: Path, desc: str, progress) -> None:
+    """Download a file with progress updates.  *progress* may be a gr.Progress or None."""
+
+    dest.parent.mkdir(parents=True, exist_ok=True)
+
+    def _report(count: int, block_size: int, total_size: int) -> None:
+        if total_size > 0 and progress is not None:
+            frac = min(count * block_size / total_size, 0.10)
+            downloaded = count * block_size
+            progress(frac, desc=f"{desc}  ({downloaded / 1e6:.0f} / {total_size / 1e6:.0f} MB)")
+
+    if progress is not None:
+        progress(0.0, desc=f"{desc}  connecting…")
+    urlretrieve(url, str(dest), reporthook=_report)
+    if progress is not None:
+        progress(0.10, desc=f"{desc}  complete")
+
+
+def _ensure_checkpoint(model_size_label: str, progress) -> Path:
+    """Return the checkpoint path, downloading the model if not already present."""
+    cfg = MODEL_DEFS[model_size_label]
+    path = cfg["path"]
+
+    if path.is_file():
+        return path
+
+    _download_with_progress(
+        url=cfg["url"],
+        dest=path,
+        desc=f"Downloading {model_size_label}",
+        progress=progress,
+    )
+    return path
+
+
+def load_model(model_size_label: str, device_str: str, progress=None) -> DepthAnythingV2:
     """Return a loaded DepthAnythingV2 model, reusing cached instance when possible."""
     global _cached_model
-
-    cfg = MODEL_DEFS[model_size_label]
-    checkpoint_path = cfg["path"]
-
-    if not checkpoint_path.is_file():
-        raise FileNotFoundError(
-            f"Model checkpoint not found: {checkpoint_path}\n\n"
-            f"Please download {checkpoint_path.name} from:\n"
-            f"  https://github.com/DepthAnything/Depth-Anything-V2/releases\n"
-            f"and place it in the models/ directory."
-        )
 
     # Reuse cached model if the same size was already loaded
     if _cached_model is not None and _cached_model[1] == model_size_label:
         return _cached_model[0]
+
+    cfg = MODEL_DEFS[model_size_label]
+    checkpoint_path = _ensure_checkpoint(model_size_label, progress)
 
     # Unload previous model to free memory
     if _cached_model is not None:
@@ -302,9 +333,8 @@ def process_video(
     # 1. Device & model
     # ------------------------------------------------------------------
     device_str, device_desc = detect_device()
-    progress(0.02, desc=f"Device: {device_desc}  |  Loading model…")
 
-    model = load_model(model_size_label, device_str)
+    model = load_model(model_size_label, device_str, progress)
 
     # ------------------------------------------------------------------
     # 2. Open video
@@ -531,7 +561,7 @@ using [Depth Anything V2](https://github.com/DepthAnything/Depth-Anything-V2).
         gr.Markdown(
             """---
 ### 📋 Tips
-- Models are loaded from the **local `models/` directory** — no network needed at runtime.
+- Models are **auto-downloaded on first use** from Hugging Face.  Subsequent runs load from the local `models/` directory instantly.
 - **Temporal smoothing** blends consecutive depth frames to reduce flicker.  Start at 60 and adjust.
 - **Audio preservation** copies the original audio into the output.
 - Everything runs **100 % locally** — nothing is uploaded anywhere.
@@ -567,9 +597,11 @@ def main() -> None:
     print(f"  Models directory: {MODELS_DIR}")
     for label, cfg in MODEL_DEFS.items():
         p = cfg["path"]
-        status = "✅" if p.is_file() else "❌"
-        size_mb = f"({p.stat().st_size / 1e6:.0f} MB)" if p.is_file() else "(missing)"
-        print(f"    {status} {label}: {size_mb}")
+        if p.is_file():
+            status = f"✅ ({p.stat().st_size / 1e6:.0f} MB)"
+        else:
+            status = "⬇  auto-download on first use"
+        print(f"    {status}  {label}")
 
     print(f"  Python          : {sys.version.split()[0]}")
     print(f"  PyTorch         : {torch.__version__}")
