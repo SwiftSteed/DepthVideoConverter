@@ -29,6 +29,7 @@ from typing import Dict, Optional, Tuple
 from urllib.request import urlretrieve
 
 import cv2
+import gradio as gr
 import numpy as np
 import torch
 
@@ -312,7 +313,7 @@ def process_video(
     invert_bw: bool,
     smoothing_strength: float,    # 0–100
     preserve_audio: bool,
-    progress=gr.Progress(),
+    progress: gr.Progress = gr.Progress(),
 ) -> str:
     """Run the full depth-conversion pipeline.  Returns path to output MP4."""
 
@@ -619,5 +620,4 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    import gradio as gr
     main()
