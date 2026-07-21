@@ -492,7 +492,7 @@ def create_ui() -> gr.Blocks:
     badge_class = {"cuda": "device-cuda", "mps": "device-mps"}.get(device_str, "device-cpu")
     device_html = f'<div class="device-badge {badge_class}">🖥  {device_desc}</div>'
 
-    with gr.Blocks(css=CSS, title="Depth Video Converter") as demo:
+    with gr.Blocks(title="Depth Video Converter") as demo:
         gr.Markdown(
             """# 🎥 Depth Video Converter
 Convert any MP4 / MOV video into a **grayscale depth-map video**
@@ -616,6 +616,7 @@ def main() -> None:
         server_port=7860,
         share=False,
         show_error=True,
+        css=CSS,
     )
 
 
