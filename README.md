@@ -1,9 +1,6 @@
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="">
-  <img alt="Depth Video Converter" src="">
-</picture>
-
-<h1 align="center">Depth Video Converter</h1>
+<p align="right">
+  <sub>EN</sub> | <a href="README_CN.md">中文</a>
+</p>
 
 <p align="center">
   Turn any video into a <strong>grayscale depth-map video</strong> using
@@ -97,8 +94,8 @@ present on startup.
 
 ```bash
 # 1. Clone the repo
-git clone https://github.com/<your-username>/DepthVideoCoverter.git
-cd DepthVideoCoverter
+git clone https://github.com/SwiftSteed/DepthVideoConverter.git
+cd DepthVideoConverter
 
 # 2. Download model checkpoints (pick at least one)
 #    → https://github.com/DepthAnything/Depth-Anything-V2/releases
