@@ -42,6 +42,14 @@
 
 底层模型为 [Depth Anything V2](https://github.com/DepthAnything/Depth-Anything-V2)，一个单目深度估计基础模型（NeurIPS 2024）。全程本地运行。
 
+### 效果演示
+
+| 原始视频 | 深度图视频（Large 模型） |
+|---|---|
+| [🎬 `examples/original.mp4`](examples/original.mp4) | [🎬 `examples/depth_large.mp4`](examples/depth_large.mp4) |
+
+> 点击上方链接下载对比。深度视频使用 **Large** 模型生成——近处物体偏亮，远处物体偏暗。
+
 ---
 
 ## 功能特性

@@ -42,6 +42,16 @@ This tool applies **monocular depth estimation** to every frame of a video, prod
 
 Powered by [Depth Anything V2](https://github.com/DepthAnything/Depth-Anything-V2), a foundation model for monocular depth estimation (NeurIPS 2024). Everything runs locally.
 
+### Demo
+
+| Original | Depth Map (Large model) |
+|---|---|
+| [🎬 `examples/original.mp4`](examples/original.mp4) | [🎬 `examples/depth_large.mp4`](examples/depth_large.mp4) |
+
+> Click the links above to download and compare. The depth video was generated
+> with the **Large** model — near objects appear bright, distant objects appear
+> dark.
+
 ---
 
 ## Features
