@@ -23,6 +23,7 @@
 
 - [What does it do?](#what-does-it-do)
 - [Features](#features)
+- [Desktop App](#desktop-app)
 - [Prerequisites](#prerequisites)
 - [Quick Start](#quick-start)
 - [Usage](#usage)
@@ -64,6 +65,55 @@ Powered by [Depth Anything V2](https://github.com/DepthAnything/Depth-Anything-V
 - **Temporal smoothing** — exponential moving average between consecutive frames to kill flicker
 - **Audio preservation** — re-mux the original audio track into the output MP4 (via ffmpeg)
 - **H.264 MP4 output** — plays everywhere: browsers, QuickTime, VLC, social media
+
+---
+
+## Desktop App
+
+A native desktop application powered by **Tauri** (Rust + React) — same tech
+stack as [Shuttle](https://github.com/litlifesoftware/shuttle).  Double-click to
+launch, no terminal needed.
+
+<p align="center">
+  <sub><i>Desktop app with drag-and-drop, settings panel, and live progress</i></sub>
+</p>
+
+### How it works
+
+The desktop app is a thin native shell.  All heavy lifting (PyTorch + Depth
+Anything V2) stays in Python, served by a local FastAPI sidecar:
+
+```
+Desktop App (Tauri + React)  ──HTTP──▶  Python Sidecar (FastAPI :9876)
+       ↓                                         ↓
+  Native window                              depth_converter
+  (15 MB .dmg)                               (PyTorch + ffmpeg)
+```
+
+### Quick Start (desktop)
+
+```bash
+# From the project root:
+
+# 1. Start the Python sidecar
+python -m server.main
+
+# 2. In another terminal, start the desktop dev server
+cd desktop
+npm install
+npm run tauri dev
+```
+
+### Bundle
+
+```bash
+cd desktop
+npm run tauri build    # → .dmg (macOS) / .msi (Windows) / .deb + .AppImage (Linux)
+```
+
+> **Note:** The bundled app requires Python 3.10+ and ffmpeg on the user's
+> system.  Future releases will bundle a standalone Python distribution for
+> a true one-click install.
 
 ---
 

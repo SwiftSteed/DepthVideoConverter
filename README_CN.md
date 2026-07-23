@@ -23,6 +23,7 @@
 
 - [它能做什么？](#它能做什么)
 - [功能特性](#功能特性)
+- [桌面应用](#桌面应用)
 - [环境要求](#环境要求)
 - [快速开始](#快速开始)
 - [使用说明](#使用说明)
@@ -62,6 +63,51 @@
 - **时序平滑** — 相邻帧指数移动平均，消除闪烁
 - **音频保留** — 将原始音轨重新封装到输出 MP4 中（需 ffmpeg）
 - **H.264 MP4 输出** — 浏览器、QuickTime、VLC、社交平台均可播放
+
+---
+
+## 桌面应用
+
+基于 **Tauri**（Rust + React）的原生桌面应用 — 与 [Shuttle](https://github.com/litlifesoftware/shuttle) 完全一致的技术栈。双击启动，无需终端。
+
+<p align="center">
+  <sub><i>拖拽上传、参数面板、实时进度 — 和 Web 版完全相同的功能</i></sub>
+</p>
+
+### 工作原理
+
+桌面壳仅负责 UI 显示。所有 AI 推理（PyTorch + Depth Anything V2）仍由 Python 以本地 FastAPI 服务形式运行：
+
+```
+桌面应用 (Tauri + React)  ──HTTP──▶  Python 侧载服务 (FastAPI :9876)
+       ↓                                         ↓
+  原生窗口                                  depth_converter
+  (15 MB .dmg)                              (PyTorch + ffmpeg)
+```
+
+### 快速开始
+
+```bash
+# 在项目根目录：
+
+# 1. 启动 Python 侧载服务
+python -m server.main
+
+# 2. 在另一终端，启动桌面开发模式
+cd desktop
+npm install
+npm run tauri dev
+```
+
+### 打包
+
+```bash
+cd desktop
+npm run tauri build    # → .dmg (macOS) / .msi (Windows) / .deb + .AppImage (Linux)
+```
+
+> **注意：** 打包后的应用需要用户系统已安装 Python 3.10+ 和 ffmpeg。
+> 后续版本将内置独立 Python 发行版，实现真正的一键安装。
 
 ---
 
