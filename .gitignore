@@ -21,3 +21,9 @@ models/*.pth
 
 # OMC
 .omc/
+
+# Desktop app (Tauri)
+desktop/node_modules/
+desktop/dist/
+desktop/src-tauri/target/
+desktop/*.tsbuildinfo
