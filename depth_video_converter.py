@@ -17,6 +17,7 @@ License: MIT
 
 from __future__ import annotations
 
+import os
 import sys
 
 import gradio as gr
@@ -206,8 +207,8 @@ def main() -> None:
 
     demo = create_ui()
     demo.launch(
-        server_name="127.0.0.1",
-        server_port=7860,
+        server_name=os.environ.get("DEPTH_HOST", "127.0.0.1"),
+        server_port=int(os.environ.get("DEPTH_PORT", "7860")),
         share=False,
         show_error=True,
     )

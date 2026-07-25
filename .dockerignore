@@ -1,0 +1,14 @@
+venv/
+.venv/
+__pycache__/
+*.pyc
+.git/
+.omc/
+.vscode/
+.idea/
+docs/
+*.md
+.DS_Store
+models/*.pth
+node_modules/
+desktop/

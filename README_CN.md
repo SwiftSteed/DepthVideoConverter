@@ -30,6 +30,23 @@
 
 ## 快速开始
 
+### Docker（推荐）
+
+```bash
+git clone https://github.com/SwiftSteed/DepthVideoConverter.git
+cd DepthVideoConverter
+docker compose up
+```
+
+浏览器打开 **http://localhost:7860**。搞定。无需安装 Python、ffmpeg、PyTorch——一切都在容器内运行。
+
+> **NVIDIA GPU？** compose 文件自动启用 GPU。
+> 需先安装 [NVIDIA Container Toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html)。
+>
+> **Apple Silicon / 无 GPU？** 自动回退 CPU 模式，慢但能用 Small 模型快速预览。
+
+### 本地（Python）
+
 ```bash
 # 前提：Python 3.10+ 和 ffmpeg
 #   macOS:   brew install ffmpeg

@@ -1,0 +1,23 @@
+services:
+  depth-video-converter:
+    build: .
+    image: depth-video-converter:latest
+    ports:
+      - "7860:7860"
+    volumes:
+      # Persist downloaded model checkpoints across container restarts
+      - ./models:/app/models
+      # Optional: mount example videos for quick testing
+      - ./examples:/app/examples:ro
+    environment:
+      - DEPTH_HOST=0.0.0.0
+      - DEPTH_PORT=7860
+    # NVIDIA GPU — comment out the deploy section if you only have CPU
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    restart: unless-stopped

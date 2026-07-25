@@ -30,6 +30,25 @@
 
 ## Quick Start
 
+### Docker (recommended)
+
+```bash
+git clone https://github.com/SwiftSteed/DepthVideoConverter.git
+cd DepthVideoConverter
+docker compose up
+```
+
+Open **http://localhost:7860**.  Done.  No Python, no ffmpeg, no PyTorch —
+everything runs inside the container.
+
+> **NVIDIA GPU?** The compose file enables GPU access automatically.
+> Make sure [NVIDIA Container Toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html) is installed.
+>
+> **Apple Silicon / no GPU?** CPU mode works out of the box — slower, but
+> fine for Small model previews.
+
+### Local (Python)
+
 ```bash
 # Prerequisites: Python 3.10+ and ffmpeg
 #   macOS:   brew install ffmpeg
