@@ -28,7 +28,27 @@
 
 ## 快速开始
 
-### Docker（推荐）
+### CLI（最简单）
+
+```bash
+git clone https://github.com/SwiftSteed/DepthVideoConverter.git
+cd DepthVideoConverter
+python3 -m venv venv && source venv/bin/activate
+pip install -r requirements.txt
+python depth_video_cli.py your-video.mp4 -m "Base (balanced, ~372 MB)"
+# 选项：-m (模型), -r (分辨率), -s (平滑), --invert, --no-audio
+```
+
+模型首次使用自动下载。
+
+### Web UI（Gradio）
+
+```bash
+python depth_video_converter.py
+# → http://127.0.0.1:7860
+```
+
+### Docker
 
 ```bash
 git clone https://github.com/SwiftSteed/DepthVideoConverter.git
@@ -36,37 +56,11 @@ cd DepthVideoConverter
 docker compose up
 ```
 
-浏览器打开 **http://localhost:7860**。搞定。无需安装 Python、ffmpeg、PyTorch——一切都在容器内运行。
+浏览器打开 **http://localhost:7860**。无需 Python、ffmpeg，全部在容器内。
 
 > **NVIDIA GPU？** compose 文件自动启用 GPU。
-> 需先安装 [NVIDIA Container Toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html)。
->
-> **Apple Silicon / 无 GPU？** 自动回退 CPU 模式，慢但能用 Small 模型快速预览。
-
-### 本地（Python）
-
-```bash
-# 前提：Python 3.10+ 和 ffmpeg
-#   macOS:   brew install ffmpeg
-#   Windows: winget install ffmpeg
-
-git clone https://github.com/SwiftSteed/DepthVideoConverter.git
-cd DepthVideoConverter
-python3 -m venv venv
-source venv/bin/activate          # Windows: venv\Scripts\Activate.ps1
-pip install -r requirements.txt
-python depth_video_converter.py
-```
-
-浏览器打开 **http://127.0.0.1:7860**，上传视频，点击 **Process**。
-
-模型首次使用时自动从 Hugging Face 下载，缓存在 `models/` 目录。
-
-> **NVIDIA GPU？** 安装 CUDA 版 PyTorch 以获得更佳性能：
-> ```bash
-> pip install torch torchvision --index-url https://download.pytorch.org/whl/cu121
-> ```
-> 再执行 `pip install -r requirements.txt`。
+> 需 [NVIDIA Container Toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html)。
+> Apple Silicon / 纯 CPU 也可以，只是慢一些。
 
 ---
 

@@ -28,7 +28,27 @@
 
 ## Quick Start
 
-### Docker (recommended)
+### CLI (simplest)
+
+```bash
+git clone https://github.com/SwiftSteed/DepthVideoConverter.git
+cd DepthVideoConverter
+python3 -m venv venv && source venv/bin/activate
+pip install -r requirements.txt
+python depth_video_cli.py your-video.mp4 -m "Base (balanced, ~372 MB)"
+# Options: -m (model), -r (resolution), -s (smoothing), --invert, --no-audio
+```
+
+Models auto-download on first use.
+
+### Web UI (Gradio)
+
+```bash
+python depth_video_converter.py
+# → http://127.0.0.1:7860
+```
+
+### Docker
 
 ```bash
 git clone https://github.com/SwiftSteed/DepthVideoConverter.git
@@ -36,39 +56,11 @@ cd DepthVideoConverter
 docker compose up
 ```
 
-Open **http://localhost:7860**.  Done.  No Python, no ffmpeg, no PyTorch —
-everything runs inside the container.
+Open **http://localhost:7860**.  No Python, no ffmpeg — everything inside the container.
 
-> **NVIDIA GPU?** The compose file enables GPU access automatically.
-> Make sure [NVIDIA Container Toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html) is installed.
->
-> **Apple Silicon / no GPU?** CPU mode works out of the box — slower, but
-> fine for Small model previews.
-
-### Local (Python)
-
-```bash
-# Prerequisites: Python 3.10+ and ffmpeg
-#   macOS:   brew install ffmpeg
-#   Windows: winget install ffmpeg
-
-git clone https://github.com/SwiftSteed/DepthVideoConverter.git
-cd DepthVideoConverter
-python3 -m venv venv
-source venv/bin/activate          # Windows: venv\Scripts\Activate.ps1
-pip install -r requirements.txt
-python depth_video_converter.py
-```
-
-Open **http://127.0.0.1:7860**, upload a video, click **Process**.
-
-Models are auto-downloaded on first use from Hugging Face (cached in `models/`).
-
-> **NVIDIA GPU?** For CUDA acceleration:
-> ```bash
-> pip install torch torchvision --index-url https://download.pytorch.org/whl/cu121
-> ```
-> Then `pip install -r requirements.txt`.
+> **NVIDIA GPU?** The compose file enables GPU automatically.
+> Requires [NVIDIA Container Toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html).
+> Apple Silicon / CPU-only works too, just slower.
 
 ---
 
