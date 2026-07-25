@@ -41,6 +41,9 @@ python depth_video_cli.py your-video.mp4 -m "Base (balanced, ~372 MB)"
 
 Models auto-download on first use.
 
+> **Claude Code user?** Install the skill and just say what you want:
+> `/depth-video` — "convert this video to depth, use Large model"
+
 ### Web UI (Gradio)
 
 ```bash

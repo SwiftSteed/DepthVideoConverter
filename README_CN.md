@@ -41,6 +41,9 @@ python depth_video_cli.py your-video.mp4 -m "Base (balanced, ~372 MB)"
 
 模型首次使用自动下载。
 
+> **Claude Code 用户？** 安装 Skill 后直接说需求：
+> `/depth-video` — "把这段视频转成深度视频，用 Large 模型"
+
 ### Web UI（Gradio）
 
 ```bash
