@@ -11,8 +11,9 @@
 </p>
 
 <p align="center">
+  <a href="https://huggingface.co/spaces/SwiftSteed/depth-video-converter"><img src="https://img.shields.io/badge/🤗-Try%20on%20HF%20Spaces-blue" alt="HF Spaces"></a>
   <img src="https://img.shields.io/badge/python-3.10%2B-blue?logo=python&logoColor=white" alt="Python">
-  <img src="https://img.shields.io/badge/platform-Windows%20%7C%20macOS-lightgrey" alt="Platform">
+  <img src="https://img.shields.io/badge/docker-ready-2496ED?logo=docker&logoColor=white" alt="Docker">
   <img src="https://img.shields.io/badge/license-MIT-green" alt="License">
 </p>
 
