@@ -20,9 +20,7 @@
 
 ## 效果演示
 
-| 原始视频 | 深度图（Large 模型） |
-|---|---|
-| [🎬 `examples/original.mp4`](examples/original.mp4) | [🎬 `examples/depth_large.mp4`](examples/depth_large.mp4) |
+[🎬 并排对比](examples/comparison.mp4) — 左：原始视频 | 右：深度图
 
 > 近处偏亮，远处偏暗。使用 **Large** 模型生成。
 

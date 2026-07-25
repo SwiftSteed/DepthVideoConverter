@@ -20,9 +20,7 @@
 
 ## Demo
 
-| Original | Depth Map (Large model) |
-|---|---|
-| [🎬 `examples/original.mp4`](examples/original.mp4) | [🎬 `examples/depth_large.mp4`](examples/depth_large.mp4) |
+[🎬 Side-by-side comparison](examples/comparison.mp4) — Original (left) vs Depth Map (right)
 
 > Near = bright, far = dark. Generated with the **Large** model.
 
