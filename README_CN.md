@@ -11,7 +11,6 @@
 </p>
 
 <p align="center">
-  <a href="https://huggingface.co/spaces/SwiftSteed/depth-video-converter"><img src="https://img.shields.io/badge/🤗-在%20HF%20Spaces%20试用-blue" alt="HF Spaces"></a>
   <img src="https://img.shields.io/badge/python-3.10%2B-blue?logo=python&logoColor=white" alt="Python">
   <img src="https://img.shields.io/badge/docker-ready-2496ED?logo=docker&logoColor=white" alt="Docker">
   <img src="https://img.shields.io/badge/license-MIT-green" alt="License">
