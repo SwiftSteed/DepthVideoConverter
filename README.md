@@ -20,7 +20,9 @@
 
 ## Demo
 
-[🎬 Side-by-side comparison](examples/comparison.mp4) — Original (left) vs Depth Map (right)
+<video src="examples/comparison.mp4" controls width="100%"></video>
+
+Original (left) vs Depth Map (right)
 
 > Near = bright, far = dark. Generated with the **Large** model.
 

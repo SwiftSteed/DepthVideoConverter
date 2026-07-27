@@ -20,7 +20,9 @@
 
 ## 效果演示
 
-[🎬 并排对比](examples/comparison.mp4) — 左：原始视频 | 右：深度图
+<video src="examples/comparison.mp4" controls width="100%"></video>
+
+左：原始视频 | 右：深度图
 
 > 近处偏亮，远处偏暗。使用 **Large** 模型生成。
 
