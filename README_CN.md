@@ -20,7 +20,8 @@
 
 ## 效果演示
 
-<video src="examples/comparison.mp4" controls width="100%"></video>
+[<video src="examples/comparison.mp4" controls width="100%"></video>](https://github.com/user-attachments/assets/aa83ef7f-7435-4c6f-a8fb-eb3f1509b9f7
+)
 
 左：原始视频 | 右：深度图
 
